@@ -1,10 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
 
-function configExpress() {
-  // lectura y parseo del body
-  app.use(express.json);
-  // muestra la peticion en el log
+function configExpress(app) {
+  app.use(express.json());
   app.use(morgan('dev'));
 }
+
+module.exports = configExpress;
 
