@@ -1,11 +1,9 @@
-/**
- * Main application routes
- */
 const specialty = require('./api/speciality');
+const user = require('./api/user');
 
 function routes(app) {
-  // API Routes
   app.use('/api/specialities', specialty);
+  app.use('/api/users', user);
 }
 
 module.exports = routes;
