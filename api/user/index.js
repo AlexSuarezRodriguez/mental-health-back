@@ -6,6 +6,7 @@ const {
   handlerUpdateUser,
   handlerDeleteUser,
 } = require('./user.controller');
+
 const { createUser } = require('./user.service');
 
 const router = Router();
@@ -15,4 +16,4 @@ router.post('/', handlerCreateUser)
 router.patch('/:id', handlerUpdateUser)
 router.delete('/:id', handlerDeleteUser)
 
-modules.exports = router;
+module.exports = router;
