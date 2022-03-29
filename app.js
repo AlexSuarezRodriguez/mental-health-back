@@ -5,12 +5,14 @@ const express = require('express');
 const configExpress = require('./config/express');
 const connectDB = require('./config/database');
 const routes = require('./routes');
+const conectDb = require ('./config/db')
 
 const app = express();
 
 connectDB();
 configExpress(app);
 routes(app);
+conectDb ();
 
 const port = process.env.PORT || 8080;
 
