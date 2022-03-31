@@ -5,22 +5,19 @@ async function getAllUsers() {
   return users;
 }
 
-async function getOneUser(id) {
+async function getUserById(id) {
   const user = await UserModel.findById(id);
-  if (!user){
-    return null;
-  } else {
-    return user;
-  }
+  return user;
+}
+
+async function getUserByEmail(email) {
+  const user = await UserModel.findOne({email});
+  return user;
 }
 
 async function deleteUser(id) {
   const user = await UserModel.findByIdAndDelete(id);
-  if (!user){
-    return null;
-  } else {
-    return user;
-  }
+  return user;
 }
 
 async function createUser(user) {
@@ -29,13 +26,14 @@ async function createUser(user) {
 }
 
 async function updateUser(id, user) {
-  const updatedUser = await UserModel.findByIdAndUpdate(id, user);
+  const updatedUser = await UserModel.findByIdAndUpdate(id, user, {new: true});
   return updatedUser;
 }
 
 module.exports = {
   getAllUsers,
-  getOneUser,
+  getUserById,
+  getUserByEmail,
   deleteUser,
   createUser,
   updateUser,

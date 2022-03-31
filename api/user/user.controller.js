@@ -1,56 +1,72 @@
 const {
   getAllUsers,
-  getOneUser,
+  getUserById,
+  getUserByEmail,
   deleteUser,
   createUser,
   updateUser,
 } = require('./user.service');
 
-async function handlerAllUsers(request, response){
+async function handlerGetAllUsers(request, response){
   const users = await getAllUsers();
-  response.json(users);
+  response.status(201).json(users);
 }
 
-async function handlerGetOneUser(request, response){
+async function handlerGetUserById(request, response){
   const { id } = request.params;
-  const user = await getOneUser(id);
-  if (!user) {
-    response.status(404).json({message: `El usuario no existe`});
-  } else {
-    response.json(user);
+  try {
+    const user = await getUserById(id);
+    response.status(201).json(user);
+  } catch (error) {
+    response.status(404).json(error);
+  }
+}
+
+async function handlerGetUserByEmail(request, response){
+  const {email} = request.body;  
+  try {
+    const user = await getUserByEmail(email);
+    response.status(201).json(user);
+  } catch (error) {
+    response.status(404).json(error);
   }
 }
 
 async function handlerCreateUser(request, response) {
-  const { body } = request;
-  const newUser = await createUser(body);
-  response.json(newUser);
+  const newUser = request.body;
+  try {
+    const user = await createUser(newUser);
+    response.status(201).json(user);
+  } catch (error) {
+    response.status(404).json(error);
+  }
 }
 
 async function handlerUpdateUser(request, response) {
   const { id } = request.params;
-  const { body } = request;
-  const updatedUser = await updateUser(id, body);
-  if (!updatedUser) {
-    response.status(404).json({message: `El usuario no existe`});
-  } else {
-    response.json(updatedUser);
+  const body = request.body;
+  try{
+    const updatedUser = await updateUser(id, body);
+    response.status(201).json(updatedUser);
+  } catch (error) {
+    response.status(500).json(error);
   }
 }
 
 async function handlerDeleteUser(request, response) {
   const { id } = request.params;
-  const deletedUser = await deleteUser(id);
-  if (!deletedUser) {
-    response.status(404).json({message: `El usuario no existe`});
-  } else {
-    response.json({message: `El usuario ha sido borrado`}).json(deletedUser);
+  try {
+    const deletedUser = await deleteUser(id);
+    response.status(201).json(deletedUser);
+  } catch (error) {
+    response.status(404).json(error);
   }
 }
 
 module.exports = {
-  handlerAllUsers,
-  handlerGetOneUser,
+  handlerGetAllUsers,
+  handlerGetUserById,
+  handlerGetUserByEmail,
   handlerCreateUser,
   handlerUpdateUser,
   handlerDeleteUser,

@@ -6,7 +6,7 @@ async function connectDB() {
   try {
     await mongoose.connect(URI)
 
-    console.log('MongoDB Connected con la base')
+    console.log('MongoDB Connected')
   } catch (error) {
     console.error(error)
     process.exit(1)
