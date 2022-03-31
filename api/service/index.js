@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const {isAuthenticated, hasRole}=require('../../auth/auth.service')
 
 const {
   handlerAllService,
@@ -10,10 +11,10 @@ const {
 
 const router = Router();
 
-router.get('/', handlerAllService)
-router.get('/service', handlerOneService)
-router.post('/', handlerCreateService)
-router.delete('/:id',handlerDeleteService)
-router.patch('/:id', handlerUpdateService)
+router.get('/',isAuthenticated(), handlerAllService)
+router.get('/service',isAuthenticated(), handlerOneService)
+router.post('/',isAuthenticated(), handlerCreateService)
+router.delete('/:id',hasRole(['doctor']),handlerDeleteService)
+router.patch('/:id',hasRole(['admin']), handlerUpdateService)
 
 module.exports = router;

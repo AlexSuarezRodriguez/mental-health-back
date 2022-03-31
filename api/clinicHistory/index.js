@@ -11,7 +11,7 @@ const router = Router();
 router.get('/', handlerAllClinicHistory)
 router.get('/:id', handlerOneClinicHistory)
 router.post('/', handlerCreateChistory)
-router.put('/:id', handlerUpdateChistory)
+router.patch('/:id',hasRole(['doctor']), handlerUpdateChistory)
 router.delete('/:id', handlerDeleteChistory)
 
 module.exports = router

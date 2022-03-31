@@ -19,8 +19,18 @@ async function handlerOneService(req, res) {
 }
 
 async function handlerCreateService(req, res) {
-  const service = await createService(req.body);
-  res.json(service);
+  console.log("es este",req.user)
+
+  const newService={
+    ...req.body,
+    userId:req.user._id
+  }
+  try{
+    const service=await createService(newService) 
+    res.json(service);
+  }catch{
+    res.status(500).json(error)
+  }
 }
 
 async function handlerDeleteService(req, res){
@@ -33,6 +43,7 @@ async function handlerDeleteService(req, res){
     res.json(service);
   }
 }
+
 async function handlerUpdateService(req, res) {
   const { id } = req.params;
   const { body } = req;

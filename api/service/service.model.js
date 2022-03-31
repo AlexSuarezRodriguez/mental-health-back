@@ -14,6 +14,11 @@ const ServiceSchema= new mongoose.Schema({
     trim: true,
     lowercase: true,
     unique: true
+  },
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required: true,
   }
 },{
   timestamps:true,

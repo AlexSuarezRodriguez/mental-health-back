@@ -5,7 +5,8 @@ function getAllService() {
 }
 
 async function getOneService(title) {
-  const service = await ServiceModel.find({title})
+  const service = await ServiceModel.find({title}).
+  populate({path:'userId', select: 'firstName lastName'})
 
   if (!service) {
     return null;
