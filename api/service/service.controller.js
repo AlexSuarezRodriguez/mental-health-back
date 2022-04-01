@@ -19,7 +19,6 @@ async function handlerOneService(req, res) {
 }
 
 async function handlerCreateService(req, res) {
-  console.log("es este",req.user)
 
   const newService={
     ...req.body,
