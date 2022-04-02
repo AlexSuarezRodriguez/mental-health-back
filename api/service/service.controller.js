@@ -12,8 +12,8 @@ async function handlerAllService(req, res) {
 }
 
 async function handlerOneService(req, res) {
-  const { title } = req.body;
-  const service = await getOneService(title);
+  const {id} = req.params;
+  const service = await getOneService(id);
 
   res.status(201).json(service);
 }
