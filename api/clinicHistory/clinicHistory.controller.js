@@ -23,7 +23,7 @@ async function handlerOneClinicHistory(req, res) {
 }
 
 async function handlerCreateChistory (req, res){
-    const newclinicHistory = req.body;
+    const newclinicHistory ={...req.body, userId:req.user._id} 
     const clinicHistory = newclinicHistory && await createChistory(newclinicHistory);
     if (!clinicHistory) {
         res.status(404).json({ message: `Clinic history not create` });
