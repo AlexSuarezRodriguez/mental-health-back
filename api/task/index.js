@@ -1,11 +1,12 @@
 const {Router} = require ('express');
+const {isAuthenticated, hasRole}=require('../../auth/auth.service');
 const {handlerAllTasks, handlerOneTask, handlerCreateTask, handlerUpdateTask, handlerDeleteTask} = require ('./task.controller');
 const router = Router();
 
-router.get('/', handlerAllTasks)
-router.get('/:id', handlerOneTask)
-router.post('/', handlerCreateTask)
-router.put('/:id', handlerUpdateTask)
-router.delete('/:id', handlerDeleteTask)
+router.get('/', isAuthenticated(), handlerAllTasks)
+router.get('/:id', isAuthenticated(), handlerOneTask)
+router.post('/', isAuthenticated(), handlerCreateTask)
+router.patch('/:id', hasRole(['doctor']), handlerUpdateTask)
+router.delete('/:id', hasRole(['doctor']), handlerDeleteTask)
 
 module.exports = router

@@ -7,6 +7,7 @@ async function getAllTasks (){
 
 async function getOneTask (id){
     const task = await taskModel.findById(id);
+    populate({path:'userId', select: 'firstName lastName'})
     return (task)
 }
 
