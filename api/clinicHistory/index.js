@@ -9,6 +9,7 @@ const {
  } = require ('./clinicHistory.controller');
 const router = Router();
 
+
 router.get('/', isAuthenticated(), handlerAllClinicHistory)
 router.get('/:id', isAuthenticated(), handlerOneClinicHistory)
 router.post('/', isAuthenticated(), handlerCreateChistory)
