@@ -6,8 +6,7 @@ async function getAllChistory (){
 }
 
 async function getOneChistory (id){
-    const clinicHistory = await clinicHistoryModel.findById(id);
-    populate({path:'userId', select: 'firstName lastName'})
+    const clinicHistory = await clinicHistoryModel.findById(id).populate({path:'userId', select: 'firstName lastName'})
     return (clinicHistory)
 }
 
