@@ -12,15 +12,24 @@ async function handlerAllService(req, res) {
 }
 
 async function handlerOneService(req, res) {
-  const { title } = req.body;
-  const service = await getOneService(title);
+  const {id} = req.params;
+  const service = await getOneService(id);
 
   res.status(201).json(service);
 }
 
 async function handlerCreateService(req, res) {
-  const service = await createService(req.body);
-  res.json(service);
+
+  const newService={
+    ...req.body,
+    userId:req.user._id
+  }
+  try{
+    const service=await createService(newService) 
+    res.json(service);
+  }catch{
+    res.status(500).json(error)
+  }
 }
 
 async function handlerDeleteService(req, res){
@@ -33,6 +42,7 @@ async function handlerDeleteService(req, res){
     res.json(service);
   }
 }
+
 async function handlerUpdateService(req, res) {
   const { id } = req.params;
   const { body } = req;
