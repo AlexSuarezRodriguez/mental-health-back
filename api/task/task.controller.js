@@ -18,7 +18,7 @@ async function handlerOneTask(req, res) {
   }
 
 async function handlerCreateTask (req, res){
-    const newTask = req.body;
+    const newTask = {...req.body, userId:req.user._id}
     const task = newTask && await createTask(newTask);
     if (!task.title) {
         res.status(404).json({ message: `Task not create` });

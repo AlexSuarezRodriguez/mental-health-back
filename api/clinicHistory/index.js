@@ -9,10 +9,11 @@ const {
  } = require ('./clinicHistory.controller');
 const router = Router();
 
-router.get('/', handlerAllClinicHistory)
-router.get('/:id', handlerOneClinicHistory)
-router.post('/', handlerCreateChistory)
-router.patch('/:id',hasRole(['doctor']), handlerUpdateChistory)
-router.delete('/:id', handlerDeleteChistory)
+
+router.get('/', isAuthenticated(), handlerAllClinicHistory)
+router.get('/:id', isAuthenticated(), handlerOneClinicHistory)
+router.post('/', isAuthenticated(), handlerCreateChistory)
+router.patch('/:id', hasRole(['doctor']), handlerUpdateChistory)
+router.delete('/:id', hasRole(['doctor']), handlerDeleteChistory)
 
 module.exports = router
