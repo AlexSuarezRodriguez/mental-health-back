@@ -10,13 +10,13 @@ async function getOneAppoiments (id){
     return (Appoiment)
 }
 
-async function createAppoiments (Appoiment){
-    const newAppoiment = await appoimentModel.create(Appoiment);
+async function createAppoiments (appoiment){
+    const newAppoiment = await appoimentModel.create(appoiment);
     return (newAppoiment)
 }
 
-async function upadateAppoiments (id, clinicH){
-    const appoimentUpdated = await appoimentModel.findByIdAndUpdate(id, clinicH, {new:true} )
+async function upadateAppoiments (id, appoiment){
+    const appoimentUpdated = await appoimentModel.findByIdAndUpdate(id, appoiment, {new:true} )
     return (appoimentUpdated)
 }
 
