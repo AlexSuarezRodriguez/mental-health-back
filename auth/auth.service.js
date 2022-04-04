@@ -29,6 +29,7 @@ function isAuthenticated(){
         return response.status(401).end();
       }
       request.user = user;
+      console.log (user)
       next();
       return null;
     }
