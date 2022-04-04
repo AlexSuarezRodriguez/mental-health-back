@@ -10,8 +10,8 @@ async function getOneAppoiments (id){
     return (Appoiment)
 }
 
-async function createAppoiments (clinicHistory){
-    const newAppoiment = await appoimentModel.create(clinicHistory);
+async function createAppoiments (Appoiment){
+    const newAppoiment = await appoimentModel.create(Appoiment);
     return (newAppoiment)
 }
 

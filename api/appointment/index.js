@@ -11,7 +11,7 @@ const router = Router();
 
 router.get('/', isAuthenticated(), handlerAllAppoiments)
 router.get('/:id', isAuthenticated(), handlerOneAppoiments)
-router.post('/', hasRole(['patient']), handlerCreateAppoiment)
+router.post('/', isAuthenticated(), handlerCreateAppoiment)
 router.patch('/:id', hasRole(['doctor']), handlerUpdateAppoiments)
 router.delete('/:id', hasRole(['doctor','patient']), handlerDeleteAppoiments)
 

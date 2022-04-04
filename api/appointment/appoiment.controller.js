@@ -23,8 +23,8 @@ const {
   }
   
   async function handlerCreateAppoiment (req, res){
-      const newAppoiment ={...req.body, userId:req.user._id} 
-      const Appoiment = newAppoiment && await createAppoiments(newAppoiment);
+      const newAppoiment = {...req.body,  userId:req.user._id}
+      const Appoiment = await createAppoiments(newAppoiment);
       if (!Appoiment) {
           res.status(404).json({ message: `appoiment not create` });
         } else {
