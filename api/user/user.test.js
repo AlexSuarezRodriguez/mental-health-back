@@ -101,7 +101,7 @@ describe('users EndPoints', () => {
     });
     
     test('should respond with the updated user PACTH', async () => {
-      // Arrange
+      
       const id ='624277066d633186da8a6721' ;
       const user = {
         firstName: 'vicente',
@@ -130,7 +130,7 @@ describe('users EndPoints', () => {
       const res = await request.delete(`/api/users`).send({
         email: 'javier@rodriguezpo.com',
       });
-      // Assert
+      
       expect(res.statusCode).toEqual(200);
     });
 
