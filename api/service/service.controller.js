@@ -8,14 +8,18 @@ const {
 
 async function handlerAllService(req, res) {
   const services = await getAllService();
-  res.json(services);
+  res.status(200).json(services);
 }
 
 async function handlerOneService(req, res) {
   const {id} = req.params;
-  const service = await getOneService(id);
-
-  res.status(201).json(service);
+  try{
+    const service = await getOneService(id);
+  
+    res.status(200).json(service);
+  }catch{
+    res.status(404).json({message:'error'})
+  }
 }
 
 async function handlerCreateService(req, res) {
