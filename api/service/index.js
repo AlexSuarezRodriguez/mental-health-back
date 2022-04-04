@@ -13,10 +13,8 @@ const router = Router();
 
 router.get('/', handlerAllService)
 router.get('/:id', handlerOneService)
-// router.get('/service', handlerOneService)
-// router.get('/service/:id', handlerOneService)
 router.post('/',isAuthenticated(), handlerCreateService)
-router.delete('/:id',hasRole(['doctor']),handlerDeleteService)
+router.delete('/:id',hasRole(['admin']),handlerDeleteService)
 router.patch('/:id',hasRole(['admin']), handlerUpdateService)
 
 module.exports = router;

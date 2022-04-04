@@ -1,34 +1,24 @@
 const {
   getAllUsers,
   getUserById,
-  getUserByEmail,
   deleteUser,
   createUser,
   updateUser,
+  getUserByEmail,
 } = require('./user.service');
 
 async function handlerGetAllUsers(request, response){
   const users = await getAllUsers();
-  response.status(201).json(users);
+  response.status(200).json(users);
 }
 
 async function handlerGetUserById(request, response){
   const { id } = request.params;
   try {
     const user = await getUserById(id);
-    response.status(201).json(user);
+    response.status(200).json(user);
   } catch (error) {
-    response.status(404).json(error);
-  }
-}
-
-async function handlerGetUserByEmail(request, response){
-  const {email} = request.body;  
-  try {
-    const user = await getUserByEmail(email);
-    response.status(201).json(user);
-  } catch (error) {
-    response.status(404).json(error);
+    response.status(404).json({message:'error'});
   }
 }
 
@@ -38,8 +28,8 @@ async function handlerCreateUser(request, response) {
     const user = await createUser(newUser);
     response.status(201).json(user);
   } catch (error) {
-    response.status(404).json(error);
-  }
+    response.status(404).json({message:"error"});
+  } 
 }
 
 async function handlerUpdateUser(request, response) {
@@ -49,24 +39,37 @@ async function handlerUpdateUser(request, response) {
     const updatedUser = await updateUser(id, body);
     response.status(201).json(updatedUser);
   } catch (error) {
-    response.status(500).json(error);
+    response.status(500).json({message:"error"});
   }
 }
 
 async function handlerDeleteUser(request, response) {
   const { id } = request.params;
-  try {
-    const deletedUser = await deleteUser(id);
-    response.status(201).json(deletedUser);
-  } catch (error) {
-    response.status(404).json(error);
+  const {email}=request.body;
+
+  if(!id){
+    try {
+      const {_id} = await getUserByEmail(email);
+      const deletedUser = await deleteUser(_id);
+      response.status(200).json(deletedUser);
+    } catch (error) {
+      response.status(400).json({message:"error"});
+    }
+  }
+  else{
+    try {
+      const deletedUser = await deleteUser(id);
+      response.status(200).json(deletedUser);
+    } catch (error) {
+      response.status(408).json({message:"error"});
+    }
+
   }
 }
 
 module.exports = {
   handlerGetAllUsers,
   handlerGetUserById,
-  handlerGetUserByEmail,
   handlerCreateUser,
   handlerUpdateUser,
   handlerDeleteUser,
