@@ -14,7 +14,7 @@ describe('users EndPoints', () => {
   afterAll(async () => {
     await users.deleteMany();
     
-    // await mongoose.connection.close();
+    await mongoose.connection.close();
   });
   describe('POST /api/users',()=>{
     test('should respond with a 201 status code POST', async () => {
