@@ -1,10 +1,15 @@
 const supertest= require('supertest');
 
-const app = require('../../app')
+const app = require('../../app');
+const connectDB = require('../../config/database');
 
 const request = supertest(app);
 
 describe('users EndPoints', () => {
+  beforeAll (async ()=>{
+    await connectDB();
+  });
+  
   describe('GET /api/users',()=>{
     test('should respond with a 200 status code GET', async () => {
       const res = await request.get('/api/users');
@@ -17,6 +22,9 @@ describe('users EndPoints', () => {
      
       expect(res.body).toBeInstanceOf(Array);  
     });  
+    afterAll(async ()=>{
+      await user.deleteMany();
+    });
   });
   
   describe('GET /api/users/:id',()=>{
@@ -83,7 +91,7 @@ describe('users EndPoints', () => {
       });
       expect(res.statusCode).toEqual(404);
       expect(res.body).toEqual({message:'error'});
-
+      
 });
 
   });
