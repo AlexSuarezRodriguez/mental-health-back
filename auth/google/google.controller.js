@@ -1,16 +1,21 @@
+const { googleValidateToken } = require('../auth.google.service');
+
 async function handlerGoogleSignIn(request, response) {
-  const {googleId, googleToken} = request.body;
-  // try {
-  //   const user = await getUserByGoogleId(googleId);
-  //   if (!user){
-  //     return response.status(401).json({message: 'Invalid googleId'});
-  //   }
-  //   const token = signToken(user.profile);
-  //   response.status(200).json(token);
-  // }catch (error){
-  //   return response.status(400).json(error);
-  // }
-  return response.status(200).json(googleToken);
+  const {googleToken} = request.body;
+
+  try {
+
+    const {name, email, picture } = await googleValidateToken(googleToken);
+
+    response.status(200).json({
+      googleToken, 
+      name, 
+      email, 
+      picture
+    });
+  }catch (error){
+    response.status(401).json({message: 'Invalid googleToken'});
+  }
 }
 
 module.exports = {handlerGoogleSignIn};
