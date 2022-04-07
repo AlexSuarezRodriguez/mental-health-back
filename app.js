@@ -12,5 +12,6 @@ connectDB();
 configExpress(app);
 routes(app);
 
+app.use(express.static('public'));
 
 module.exports=app
