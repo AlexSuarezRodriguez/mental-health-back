@@ -28,7 +28,7 @@ async function handlerCreateChistory (req, res){
     if (!clinicHistory) {
         res.status(404).json({ message: `Clinic history not create` });
       } else {
-        res.json(clinicHistory);
+        res.starus(201).json(clinicHistory);
       }
 }
 
