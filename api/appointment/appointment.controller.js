@@ -3,8 +3,8 @@ const {
   getOneAppointment,
   createAppointment,
   deleteAppointment,
-  updateAppointment
-} = require('./appointment.service')
+  updateAppointment,
+} = require("./appointment.service");
 
 async function handlerAllAppointment(req, res) {
   const appointments = await getAllAppointment();
@@ -12,32 +12,31 @@ async function handlerAllAppointment(req, res) {
 }
 
 async function handlerOneAppointment(req, res) {
-  const {id} = req.params;
-  try{
+  const { id } = req.params;
+  try {
     const appointment = await getOneAppointment(id);
-  
+
     res.status(200).json(appointment);
-  }catch(error){
-    res.status(404).json({message:'error'})
+  } catch (error) {
+    res.status(404).json({ message: "error" });
   }
 }
 
 async function handlerCreateAppointment(req, res) {
-
-  const newAppointment={
+  const newAppointment = {
     ...req.body,
-    patientId:req.user._id,
-    doctorId:req.body.doctorId,
-  }
-  try{
-    const appointment=await createAppointment(newAppointment) 
+    patientId: req.user._id,
+    doctorId: req.body.doctorId,
+  };
+  try {
+    const appointment = await createAppointment(newAppointment);
     res.status(200).json(appointment);
-  }catch(error){
-    res.status(500).json({message:"error"})
+  } catch (error) {
+    res.status(500).json({ message: "error" });
   }
 }
 
-async function handlerDeleteAppointment(req, res){
+async function handlerDeleteAppointment(req, res) {
   const id = req.params.id;
   const appointment = await deleteAppointment(id);
 
@@ -52,9 +51,9 @@ async function handlerUpdateAppointment(req, res) {
   const { id } = req.params;
   const { body } = req.body;
   const updatedAppointment = await updateAppointment(id, body);
-  
+
   if (!updatedAppointment) {
-    res.status(404).json({message: `El usuario no existe`});
+    res.status(404).json({ message: `El usuario no existe` });
   } else {
     res.status(200).json(updatedAppointment);
   }
@@ -66,4 +65,4 @@ module.exports = {
   handlerCreateAppointment,
   handlerDeleteAppointment,
   handlerUpdateAppointment,
-}
+};

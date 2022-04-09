@@ -1,13 +1,14 @@
-const appointmentModel = require('./appointment.model')
+const appointmentModel = require("./appointment.model");
 
 function getAllAppointment() {
   return appointmentModel.find();
 }
 
 async function getOneAppointment(_id) {
-  const appointment = await appointmentModel.find({doctorId:{_id}}).
-    populate({path:'doctorId', select: 'firstName lastName'}).
-    populate({path:'patientId', select: 'firstName lastName'})
+  const appointment = await appointmentModel
+    .find({ doctorId: { _id } })
+    .populate({ path: "doctorId", select: "firstName lastName" })
+    .populate({ path: "patientId", select: "firstName lastName" });
 
   if (!appointment) {
     return null;
@@ -20,17 +21,20 @@ async function createAppointment(service) {
   return newAppointment.save();
 }
 
-async function deleteAppointment(id){
-const appointment = await  appointmentModel.findByIdAndDelete(id)
+async function deleteAppointment(id) {
+  const appointment = await appointmentModel.findByIdAndDelete(id);
 
-  if(!appointment){
+  if (!appointment) {
     return null;
   }
   return appointment;
 }
 
 async function updateAppointment(id, appointment) {
-  const updatedAppointment = await appointmentModel.findByIdAndUpdate(id, appointment);
+  const updatedAppointment = await appointmentModel.findByIdAndUpdate(
+    id,
+    appointment
+  );
   return updatedAppointment;
 }
 
@@ -40,4 +44,4 @@ module.exports = {
   createAppointment,
   deleteAppointment,
   updateAppointment,
-}
+};
