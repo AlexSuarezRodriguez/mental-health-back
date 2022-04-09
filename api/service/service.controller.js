@@ -26,12 +26,13 @@ async function handlerCreateService(req, res) {
 
   const newService={
     ...req.body,
-    userId:req.user._id
+    userId:req.user._id,
+    doctorId:req.body.doctorId,
   }
   try{
     const service=await createService(newService) 
     res.json(service);
-  }catch{
+  }catch(error){
     res.status(500).json(error)
   }
 }
