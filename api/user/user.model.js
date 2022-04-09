@@ -89,11 +89,12 @@ UserSchema.methods.comparePassword = async function(candidatePassword){
 };
 
 UserSchema.virtual('profile').get(function(){
-  const {firstName, lastName,email}=this;
+  const {firstName, lastName,email,role}=this;
 
   return{
     fullName:`${firstName} ${lastName}`,
     email,
+    role
   };
 });
 
