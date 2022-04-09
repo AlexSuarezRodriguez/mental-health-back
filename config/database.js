@@ -4,12 +4,12 @@ const URI = process.env.MONGO_DB_URI;
 
 async function connectDB() {
   try {
-    await mongoose.connect(URI)
+    await mongoose.connect(URI);
 
-    console.log('MongoDB Connected')
+    console.log('MongoDB Connected');
   } catch (error) {
-    console.error(error)
-    process.exit(1)
+    console.error(error);
+    process.exit(1);
   }
 }
 
