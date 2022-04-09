@@ -10,9 +10,9 @@ const {
 const router = Router();
 
 
-router.get('/', isAuthenticated(), handlerAllClinicHistory)
-router.get('/:id', isAuthenticated(), handlerOneClinicHistory)
-router.post('/', isAuthenticated(), handlerCreateChistory)
+router.get('/',  handlerAllClinicHistory)
+router.get('/:id',  handlerOneClinicHistory)
+router.post('/',  handlerCreateChistory)
 router.patch('/:id', hasRole(['doctor']), handlerUpdateChistory)
 router.delete('/:id', hasRole(['doctor']), handlerDeleteChistory)
 
