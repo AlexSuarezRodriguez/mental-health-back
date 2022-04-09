@@ -1,8 +1,9 @@
-const supertest= require('supertest');
+const supertest = require('supertest');
 const mongoose = require('mongoose');
 
-const app = require('../../app')
+const app = require('../../app');
 const connectDB = require('../../config/database');
+
 const request = supertest(app);
 
 describe('users EndPoints', () => {
@@ -12,7 +13,7 @@ describe('users EndPoints', () => {
   afterAll(async () => {
     await mongoose.connection.close();
   });
-  describe('Get all tasks',() => {
+  describe('Get all tasks', () => {
     test('should respond with a 200 status code', async () => {
       const allTasks = await request.get('/api/tasks');
       expect(allTasks.statusCode).toEqual(200);
@@ -22,7 +23,7 @@ describe('users EndPoints', () => {
       expect(allTasks.body).toBeInstanceOf(Array);
     });
   });
-  describe('Get one task',() => {
+  describe('Get one task', () => {
     test('should respond with a 200 status code', async () => {
       const allTasks = await request.get('/api/tasks');
       const taskId = allTasks.body[0]._id;
@@ -34,8 +35,8 @@ describe('users EndPoints', () => {
       const taskId = allTasks.body[0]._id;
       const oneTask = await request.get(`/api/tasks/${taskId}`);
       expect(oneTask.body).toEqual(expect.objectContaining({
-        title:'Wendy quiere comer',
-        status:true,
+        title: 'Wendy quiere comer',
+        status: true,
       }));
     });
     test('should respond with a 404 when task is not found', async () => {
