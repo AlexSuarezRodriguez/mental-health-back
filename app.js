@@ -17,10 +17,9 @@ if (env !== 'test') {
   connectDB();
 }
 
-
 configExpress(app);
 routes(app);
 
 app.use(express.static('public'));
 
-module.exports=app
+module.exports = app;
