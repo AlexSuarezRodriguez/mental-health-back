@@ -19,12 +19,13 @@ describe('clinic History Endpoints', () => {
       const res = await request
         .post('/api/clinicHistorys')
         .send({
-          description: 'paciente con depresión'          
+          description: 'test 1232131' ,
+                
         });
   
       expect(res.statusCode).toEqual(201);
       expect(res.body).toEqual(expect.objectContaining({
-        description: 'paciente con depresión',
+        description: 'test 1232131',
       }));
     });
 
@@ -45,10 +46,10 @@ describe('clinic History Endpoints', () => {
     
   })
 
-  describe('Get clinicHistory', ()=>{
+  describe('Get clinicHistory fo id', ()=>{
     test('should respond with a 200 status code if search for id GET/:id', async () => {   
       
-      const id='6250afbbd532399353b938e7';
+      const id='6250af864d4bacf4d3737f8d';
 
       const res = await request.get(`/api/clinicHistorys/${id}`);
       
@@ -56,8 +57,4 @@ describe('clinic History Endpoints', () => {
     });
   })
 
-  
-  
-    
-  
  });
