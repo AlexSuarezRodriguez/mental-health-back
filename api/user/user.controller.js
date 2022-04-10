@@ -36,14 +36,14 @@ async function handlerCreateUser(request, response) {
     newUser.passwordResetExpires = Date.now() + 3600000 * 24;
     const user = await createUser(newUser);
     const email = {
-      from: '"no reply" <ingdiegocubidestrane@gmail.com>',
+      from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
       to: user.email,
-      subject: 'Activate your account Template',
-      template_id: 'd-9d62764a804348bea1d4c5cb5ef4fee6',
+      subject: 'Activa tu cuenta en Mental Health',
+      template_id: 'd-97faeebd7a954eb8a5b64db3f3d1decd',
       dynamic_template_data: {
         firstName: user.firstName,
         lastName: user.lastName,
-        url: `https://mental-health-sigma.vercel.app/${hash}`,
+        url: `http://localhost:8080/auth/local/verify/${hash}`,
       },
     };
     await sendMail(email);

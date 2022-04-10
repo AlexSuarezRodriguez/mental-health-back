@@ -15,7 +15,7 @@ function routes(app) {
   app.use('/api/users', user);
   app.use('/api/tasks', task);
   app.use('/api/services', service);
-  app.use('/api/appoiments', appoiment )
+  app.use('/api/appoiments', appoiment);
   app.use('/api/specialities', specialty);
   app.use('/api/clinicHistorys', clinicHistory);
 }
