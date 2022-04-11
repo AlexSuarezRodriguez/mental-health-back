@@ -1,4 +1,4 @@
-const appointmentModel = require("./appointment.model");
+const appointmentModel = require('./appointment.model');
 
 function getAllAppointment() {
   return appointmentModel.find();
@@ -7,8 +7,8 @@ function getAllAppointment() {
 async function getOneAppointment(_id) {
   const appointment = await appointmentModel
     .find({ doctorId: { _id } })
-    .populate({ path: "doctorId", select: "firstName lastName" })
-    .populate({ path: "patientId", select: "firstName lastName" });
+    .populate({ path: 'doctorId', select: 'firstName lastName' })
+    .populate({ path: 'patientId', select: 'firstName lastName' });
 
   if (!appointment) {
     return null;
@@ -33,7 +33,7 @@ async function deleteAppointment(id) {
 async function updateAppointment(id, appointment) {
   const updatedAppointment = await appointmentModel.findByIdAndUpdate(
     id,
-    appointment
+    appointment,
   );
   return updatedAppointment;
 }
