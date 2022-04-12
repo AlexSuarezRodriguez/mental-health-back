@@ -4,7 +4,7 @@ const {
   createAppointment,
   deleteAppointment,
   updateAppointment,
-} = require("./appointment.service");
+} = require('./appointment.service');
 
 async function handlerAllAppointment(req, res) {
   const appointments = await getAllAppointment();
@@ -18,7 +18,7 @@ async function handlerOneAppointment(req, res) {
 
     res.status(200).json(appointment);
   } catch (error) {
-    res.status(404).json({ message: "error" });
+    res.status(404).json({ message: 'error' });
   }
 }
 
@@ -32,12 +32,12 @@ async function handlerCreateAppointment(req, res) {
     const appointment = await createAppointment(newAppointment);
     res.status(200).json(appointment);
   } catch (error) {
-    res.status(500).json({ message: "error" });
+    res.status(500).json({ message: 'error' });
   }
 }
 
 async function handlerDeleteAppointment(req, res) {
-  const id = req.params.id;
+  const { id } = req.params;
   const appointment = await deleteAppointment(id);
 
   if (!appointment) {
@@ -53,7 +53,7 @@ async function handlerUpdateAppointment(req, res) {
   const updatedAppointment = await updateAppointment(id, body);
 
   if (!updatedAppointment) {
-    res.status(404).json({ message: `El usuario no existe` });
+    res.status(404).json({ message: 'El usuario no existe' });
   } else {
     res.status(200).json(updatedAppointment);
   }
