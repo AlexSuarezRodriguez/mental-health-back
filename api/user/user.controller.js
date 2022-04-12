@@ -46,16 +46,16 @@ async function handlerCreateUser(request, response) {
         url: `https://mental--health--back.com/auth/local/verify/${hash}`,
       },
     };
-    await sendMail(email);
+    //await sendMail(email);
     response.status(201).json(user);
   } catch (error) {
-    response.status(404).json({ message: 'error' });
+    response.status(404).json({ message: JSON.stringify(error)  });
   }
 }
 
 async function handlerUpdateUser(request, response) {
   const { id } = request.params;
-  const { body } = request.body;
+  const { body } = request;
   try {
     const updatedUser = await updateUser(id, body);
     response.status(201).json(updatedUser);

@@ -63,6 +63,30 @@ const UserSchema = new mongoose.Schema(
     specialization_diploma: {
       type: String,
     },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
+    atentionarea: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
+    experience: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
+    academic: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
