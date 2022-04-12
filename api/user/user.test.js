@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
@@ -19,9 +20,9 @@ describe('users EndPoints', () => {
   describe('POST /api/users', () => {
     test('should respond with a 201 status code POST', async () => {
       const res = await request.post('/api/users').send({
-        firstName: 'javier',
-        lastName: 'rodriguez',
-        email: 'javiermsvsdark@rodriguezpo.com',
+        firstName: 'prueba',
+        lastName: 'test',
+        email: 'prueba@test.com',
         password: '123',
       });
       expect(res.statusCode).toEqual(201);

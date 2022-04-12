@@ -1,11 +1,11 @@
-const appointmentModel = require('./appointment.model');
+const AppointmentModel = require('./appointment.model');
 
 function getAllAppointment() {
-  return appointmentModel.find();
+  return AppointmentModel.find();
 }
 
 async function getOneAppointment(_id) {
-  const appointment = await appointmentModel
+  const appointment = await AppointmentModel
     .find({ doctorId: { _id } })
     .populate({ path: 'doctorId', select: 'firstName lastName' })
     .populate({ path: 'patientId', select: 'firstName lastName' });
@@ -16,13 +16,13 @@ async function getOneAppointment(_id) {
   return appointment;
 }
 
-async function createAppointment(service) {
-  const newAppointment = await new appointmentModel(service);
+async function createAppointment(appointment) {
+  const newAppointment = await new AppointmentModel(appointment);
   return newAppointment.save();
 }
 
 async function deleteAppointment(id) {
-  const appointment = await appointmentModel.findByIdAndDelete(id);
+  const appointment = await AppointmentModel.findByIdAndDelete(id);
 
   if (!appointment) {
     return null;
@@ -31,7 +31,7 @@ async function deleteAppointment(id) {
 }
 
 async function updateAppointment(id, appointment) {
-  const updatedAppointment = await appointmentModel.findByIdAndUpdate(
+  const updatedAppointment = await AppointmentModel.findByIdAndUpdate(
     id,
     appointment,
   );

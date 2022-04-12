@@ -43,7 +43,7 @@ async function handlerCreateUser(request, response) {
       dynamic_template_data: {
         firstName: user.firstName,
         lastName: user.lastName,
-        url: `https://mental--health--back.com/auth/local/verify/${hash}`,
+        url: `https://mental--health--back.herokuapp.com/auth/local/verify/${hash}`,
       },
     };
     await sendMail(email);
