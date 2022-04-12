@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
@@ -7,7 +8,7 @@ const users = require('./user.model');
 
 const request = supertest(app);
 
-describe("users EndPoints", () => {
+describe('users EndPoints', () => {
   beforeAll(async () => {
     await connectDB();
   });
@@ -36,12 +37,12 @@ describe("users EndPoints", () => {
       );
     });
 
-    test("should respond with a 404 status code POST", async () => {
-      const res = await request.post("/api/users").send({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
+    test('should respond with a 404 status code POST', async () => {
+      const res = await request.post('/api/users').send({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
       });
       expect(res.statusCode).toEqual(404);
       expect(res.body).toEqual({ message: 'error' });

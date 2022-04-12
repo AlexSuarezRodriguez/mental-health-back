@@ -1,5 +1,5 @@
-const authLocal = require("./auth/local");
-const authGoogle = require("./auth/google");
+const authLocal = require('./auth/local');
+const authGoogle = require('./auth/google');
 
 const user = require('./api/user');
 const task = require('./api/task');
