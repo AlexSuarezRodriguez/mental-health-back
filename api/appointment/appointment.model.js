@@ -6,13 +6,11 @@ const ServiceSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true,
     },
     end: {
       type: String,
       required: true,
       trim: true,
-      unique: true,
     },
     patientId: {
       type: mongoose.Schema.Types.ObjectId,

@@ -109,6 +109,7 @@ UserSchema.pre('save', async function (next) {
     return next();
   } catch (error) {
     next();
+    return null;
   }
 });
 
@@ -120,13 +121,14 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 
 UserSchema.virtual('profile').get(function () {
   const {
-    firstName, lastName, email, role,
+    firstName, lastName, email, role, _id,
   } = this;
 
   return {
     fullName: `${firstName} ${lastName}`,
     email,
     role,
+    _id,
   };
 });
 
