@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 const {
   getAllAppointment,
   getOneAppointment,
   createAppointment,
   deleteAppointment,
   updateAppointment,
+  getAppointmentByPatientId,
 } = require('./appointment.service');
 
 async function handlerAllAppointment(req, res) {
@@ -15,7 +17,15 @@ async function handlerOneAppointment(req, res) {
   const { id } = req.params;
   try {
     const appointment = await getOneAppointment(id);
-
+    res.status(200).json(appointment);
+  } catch (error) {
+    res.status(404).json({ message: 'error' });
+  }
+}
+async function handlerAppointmentByPatientId(req, res) {
+  const { id } = req.params;
+  try {
+    const appointment = await getAppointmentByPatientId(id);
     res.status(200).json(appointment);
   } catch (error) {
     res.status(404).json({ message: 'error' });
@@ -65,4 +75,5 @@ module.exports = {
   handlerCreateAppointment,
   handlerDeleteAppointment,
   handlerUpdateAppointment,
+  handlerAppointmentByPatientId,
 };
