@@ -12,8 +12,12 @@ const {
 const { sendMail } = require('../../utils/emails');
 
 async function handlerGetAllUsers(request, response) {
-  const users = await getAllUsers();
-  response.status(200).json(users);
+  try {
+    const users = await getAllUsers();
+    response.status(200).json(users);
+  } catch (error) {
+    response.status(404).json({ message: 'error' });
+  }
 }
 
 async function handlerGetUserById(request, response) {
@@ -46,10 +50,10 @@ async function handlerCreateUser(request, response) {
         url: `https://mental--health--back.herokuapp.com/auth/local/verify/${hash}`,
       },
     };
-    //await sendMail(email);
+    // await sendMail(email);
     response.status(201).json(user);
   } catch (error) {
-    response.status(404).json({ message: JSON.stringify(error)  });
+    response.status(404).json({ message: JSON.stringify(error) });
   }
 }
 
@@ -74,14 +78,14 @@ async function handlerDeleteUser(request, response) {
       const deletedUser = await deleteUser(_id);
       response.status(200).json(deletedUser);
     } catch (error) {
-      response.status(400).json({ message: 'error' });
+      response.status(404).json({ message: 'error' });
     }
   } else {
     try {
       const deletedUser = await deleteUser(id);
       response.status(200).json(deletedUser);
     } catch (error) {
-      response.status(408).json({ message: 'error' });
+      response.status(404).json({ message: 'error' });
     }
   }
 }

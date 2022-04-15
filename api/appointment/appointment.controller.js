@@ -17,7 +17,6 @@ async function handlerOneAppointment(req, res) {
   const { id } = req.params;
   try {
     const appointment = await getOneAppointment(id);
-
     res.status(200).json(appointment);
   } catch (error) {
     res.status(404).json({ message: 'error' });
@@ -27,7 +26,6 @@ async function handlerAppointmentByPatientId(req, res) {
   const { id } = req.params;
   try {
     const appointment = await getAppointmentByPatientId(id);
-
     res.status(200).json(appointment);
   } catch (error) {
     res.status(404).json({ message: 'error' });
