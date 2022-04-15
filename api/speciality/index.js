@@ -5,7 +5,7 @@ const {
   handlerOneSpeciality,
   handlerCreateSpeciality,
   handlerUpdateSpeciality,
-  handlerDeleteSpeciality
+  handlerDeleteSpeciality,
 } = require('./speciality.controller');
 
 const router = Router();
