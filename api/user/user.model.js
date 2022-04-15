@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     phone: {
       type: String,
       trim: true,
+      required: true,
     },
     email: {
       type: String,
@@ -26,22 +27,22 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    avatar: {
-      type: String,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
     role: {
       type: String,
       default: 'patient',
       enum: ['doctor', 'admin', 'patient'],
       required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
     },
     specialty: {
       type: String,
@@ -62,6 +63,26 @@ const UserSchema = new mongoose.Schema(
     },
     specialization_diploma: {
       type: String,
+    },
+    description: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    atentionarea: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    experience: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    academic: {
+      type: String,
+      trim: true,
+      lowercase: true,
     },
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -85,6 +106,7 @@ UserSchema.pre('save', async function (next) {
     return next();
   } catch (error) {
     next();
+    return null;
   }
 });
 
@@ -96,13 +118,14 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 
 UserSchema.virtual('profile').get(function () {
   const {
-    firstName, lastName, email, role,
+    firstName, lastName, email, role, _id,
   } = this;
 
   return {
     fullName: `${firstName} ${lastName}`,
     email,
     role,
+    _id,
   };
 });
 
