@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
     phone: {
       type: String,
       trim: true,
+      required: true,
     },
     email: {
       type: String,
@@ -26,22 +27,22 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    avatar: {
-      type: String,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
     role: {
       type: String,
       default: 'patient',
       enum: ['doctor', 'admin', 'patient'],
       required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
     },
     specialty: {
       type: String,
@@ -65,25 +66,21 @@ const UserSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
       trim: true,
       lowercase: true,
     },
     atentionarea: {
       type: String,
-      required: true,
       trim: true,
       lowercase: true,
     },
     experience: {
       type: String,
-      required: true,
       trim: true,
       lowercase: true,
     },
     academic: {
       type: String,
-      required: true,
       trim: true,
       lowercase: true,
     },
