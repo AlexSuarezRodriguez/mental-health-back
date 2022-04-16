@@ -11,6 +11,7 @@ async function getOneTask(id) {
 }
 
 async function createTask(task) {
+  console.log(task);
   const newTask = await taskModel.create(task);
   return (newTask);
 }

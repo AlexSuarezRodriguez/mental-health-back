@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', handlerAllTasks);
 router.get('/:id', handlerOneTask);
 router.post('/', isAuthenticated(), handlerCreateTask);
-router.patch('/:id', hasRole(['doctor']), handlerUpdateTask);
-router.delete('/:id', hasRole(['doctor']), handlerDeleteTask);
+router.patch('/:id', hasRole(['patient']), handlerUpdateTask);
+router.delete('/:id', hasRole(['patient']), handlerDeleteTask);
 
 module.exports = router;

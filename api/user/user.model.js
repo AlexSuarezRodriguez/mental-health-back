@@ -66,10 +66,6 @@ const UserSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-<<<<<<< HEAD
-      required: true,
-=======
->>>>>>> develop
       trim: true,
       lowercase: true,
     },
