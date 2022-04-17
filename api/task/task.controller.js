@@ -1,9 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 const {
   getAllTasks, getOneTask, createTask, updatedTask, deleteTask,
 } = require('./task.service');
 
 async function handlerAllTasks(req, res) {
-  const tasks = await getAllTasks();
+  const tasks = await getAllTasks(req.user);
   res.json(tasks);
 }
 

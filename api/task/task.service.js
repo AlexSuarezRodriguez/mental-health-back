@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 const taskModel = require('./task.model');
 
-async function getAllTasks() {
-  const tasks = await taskModel.find();
+async function getAllTasks(user) {
+  const tasks = await taskModel.find({ userId: user._id });
   return (tasks);
 }
 

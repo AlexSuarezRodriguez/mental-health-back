@@ -15,6 +15,17 @@ async function getOneAppointment(_id) {
   }
   return appointment;
 }
+async function getAppointmentByPatientId(_id) {
+  const appointment = await AppointmentModel
+    .find({ patientId: { _id } })
+    .populate({ path: 'doctorId', select: '_id' })
+    .populate({ path: 'patientId', select: '_id' });
+
+  if (!appointment) {
+    return null;
+  }
+  return appointment;
+}
 
 async function createAppointment(appointment) {
   const newAppointment = await new AppointmentModel(appointment);
@@ -44,4 +55,5 @@ module.exports = {
   createAppointment,
   deleteAppointment,
   updateAppointment,
+  getAppointmentByPatientId,
 };
