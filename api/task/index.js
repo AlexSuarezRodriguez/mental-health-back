@@ -6,8 +6,8 @@ const {
 
 const router = Router();
 
-router.get('/', handlerAllTasks);
-router.get('/:id', handlerOneTask);
+router.get('/', isAuthenticated(), handlerAllTasks);
+router.get('/:id', isAuthenticated(), handlerOneTask);
 router.post('/', isAuthenticated(), handlerCreateTask);
 router.patch('/:id', hasRole(['patient']), handlerUpdateTask);
 router.delete('/:id', hasRole(['patient']), handlerDeleteTask);
