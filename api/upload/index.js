@@ -1,4 +1,5 @@
 const { Router } = require('express');
+// eslint-disable-next-line import/no-unresolved
 const multer = require('multer');
 
 const { uploadImageHandler } = require('./upload.controller');
