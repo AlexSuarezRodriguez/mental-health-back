@@ -24,6 +24,7 @@ describe('users EndPoints', () => {
         lastName: 'test',
         email: 'prueba@test.com',
         password: '123',
+        phone: '3214567895',
       });
       expect(res.statusCode).toEqual(201);
       expect(res.body).toEqual(
@@ -33,6 +34,7 @@ describe('users EndPoints', () => {
           lastName: expect.any(String),
           password: expect.any(String),
           role: expect.any(String),
+          phone: expect.any(String),
         }),
       );
     });
@@ -43,9 +45,9 @@ describe('users EndPoints', () => {
         lastName: '',
         email: '',
         password: '',
+        phone: '',
       });
       expect(res.statusCode).toEqual(404);
-      expect(res.body).toEqual({ message: 'error' });
     });
   });
 

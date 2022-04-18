@@ -27,14 +27,14 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     role: {
       type: String,
       default: 'patient',
       enum: ['doctor', 'admin', 'patient'],
-      required: true,
-    },
-    password: {
-      type: String,
       required: true,
     },
     avatar: {
