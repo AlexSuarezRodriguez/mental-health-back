@@ -1,10 +1,30 @@
-const { makePayment, createPayment, createCustomer } = require('./checkout.service');
+/* eslint-disable no-underscore-dangle */
+const {
+  makePayment,
+  createPayment,
+  createCustomer,
+  retrieveCustomer,
+} = require('./checkout.service');
+const { updateUser } = require('../user/user.service');
 
 async function handlerCheckout(request, response) {
   const { paymentMethod, amount } = request.body;
   try {
-    const customer = await createCustomer(request.user, paymentMethod);
-    const payment = await makePayment({ paymentMethod, amount });
+    let customer = await retrieveCustomer(request.user?.payment?.customerId);
+    if (!customer) {
+      customer = await createCustomer(request.user, paymentMethod);
+    }
+    const userToUpdate = {
+      payment: {
+        customerId: customer.Id,
+        cards: [{
+          ...paymentMethod.card,
+          paymentMethodId: paymentMethod.id,
+        }],
+      },
+    };
+    await updateUser(request.user._id, userToUpdate);
+    const payment = await makePayment({ paymentMethod, amount, customer });
     const registeredPayment = {
       refId: payment.id,
       description: payment.description,

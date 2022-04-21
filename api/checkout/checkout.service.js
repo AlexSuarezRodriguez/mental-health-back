@@ -17,7 +17,16 @@ async function createCustomer(user, paymentMethod) {
   }
 }
 
-async function makePayment({ paymentMethod, amount }) {
+async function retrieveCustomer(customerId) {
+  try {
+    const customer = await stripe.customers.retrieve(customerId);
+    return customer;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function makePayment({ paymentMethod, amount, customer }) {
   const { id } = paymentMethod;
   try {
     const payment = await stripe.paymentIntents.create({
@@ -26,6 +35,8 @@ async function makePayment({ paymentMethod, amount }) {
       currency: 'usd',
       confirm: true,
       description: 'example',
+      receipt_email: 'ingdiegocubidestrane@gmail.com',
+      customer: customer.id,
     });
     return payment;
   } catch (error) {
@@ -37,4 +48,9 @@ function createPayment(payment) {
   return Payment.create(payment);
 }
 
-module.exports = { createCustomer, makePayment, createPayment };
+module.exports = {
+  createCustomer,
+  makePayment,
+  createPayment,
+  retrieveCustomer,
+};
