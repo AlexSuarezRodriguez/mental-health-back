@@ -11,7 +11,7 @@ async function getOneChistory(id) {
 }
 
 async function getChistorybyUserId(_id) {
-  const clinicHistory = await clinicHistoryModel.find({ patientId: { _id } }).populate({ path: 'doctorId', select: 'firstName lastName' }).populate({ path: 'patientId', select: 'firstName lastName' });
+  const clinicHistory = await clinicHistoryModel.find({ patientId: { _id } }).sort({ createdAt: -1 }).populate({ path: 'doctorId', select: 'firstName lastName' }).populate({ path: 'patientId', select: 'firstName lastName' });
   return clinicHistory;
 }
 
