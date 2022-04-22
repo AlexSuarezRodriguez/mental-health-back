@@ -16,7 +16,7 @@ async function handlerCheckout(request, response) {
     }
     const userToUpdate = {
       payment: {
-        customerId: customer.Id,
+        customerId: customer.id,
         cards: [{
           ...paymentMethod.card,
           paymentMethodId: paymentMethod.id,

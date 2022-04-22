@@ -91,7 +91,7 @@ const UserSchema = new mongoose.Schema(
           paymentMethodId: String,
           brand: String,
           country: String,
-          exp_mont: Number,
+          exp_month: Number,
           exp_year: Number,
           funding: String,
           last4: String,

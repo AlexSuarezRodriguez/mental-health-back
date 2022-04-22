@@ -35,7 +35,7 @@ async function makePayment({ paymentMethod, amount, customer }) {
       currency: 'usd',
       confirm: true,
       description: 'example',
-      receipt_email: 'ingdiegocubidestrane@gmail.com',
+      receipt_email: customer.email,
       customer: customer.id,
     });
     return payment;
