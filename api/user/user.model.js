@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
+      default: 'https://res.cloudinary.com/mentalhealth/image/upload/v1650642132/perfilgenerico_h7dtjm.png',
     },
     isActive: {
       type: Boolean,
