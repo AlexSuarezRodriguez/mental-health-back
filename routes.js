@@ -8,6 +8,7 @@ const specialty = require('./api/speciality');
 const appointment = require('./api/appointment');
 const clinicHistory = require('./api/clinicHistory');
 const upload = require('./api/upload');
+const checkout = require('./api/checkout');
 
 function routes(app) {
   app.use('/auth/local', authLocal);
@@ -19,6 +20,7 @@ function routes(app) {
   app.use('/api/specialities', specialty);
   app.use('/api/clinicHistorys', clinicHistory);
   app.use('/api/upload', upload);
+  app.use('/api/checkout', checkout);
 }
 
 module.exports = routes;
