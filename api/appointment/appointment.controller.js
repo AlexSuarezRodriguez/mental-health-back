@@ -8,6 +8,9 @@ const {
   getAppointmentByPatientId,
 } = require('./appointment.service');
 
+const { getUserById } = require('../user/user.service');
+const { sendMail } = require('../../utils/emails');
+
 async function handlerAllAppointment(req, res) {
   const appointments = await getAllAppointment();
   res.status(200).json(appointments);
@@ -39,7 +42,35 @@ async function handlerCreateAppointment(req, res) {
     doctorId: req.body.doctorId,
   };
   try {
+    const patient = await getUserById(newAppointment.patientId);
+    const doctor = await getUserById(newAppointment.doctorId);
     const appointment = await createAppointment(newAppointment);
+
+    const startSplitted = appointment.start.split('T');
+    const endSplitted = appointment.end.split('T');
+    const startDate = startSplitted[0].split('-');
+    const finalDate = [];
+    for (let i = 2; i >= 0; i -= 1) {
+      finalDate.push(startDate[i]);
+    }
+    const dataprue = finalDate.join('/');
+    const startTime = startSplitted[1];
+    const endTime = endSplitted[1];
+
+    const email = {
+      from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
+      to: patient.email,
+      subject: 'Confirmación cita Mental Health',
+      template_id: 'd-ec2ab30c0fa64c358b4efd27f56a79a8',
+      dynamic_template_data: {
+        patient: `${patient.firstName} ${patient.lastName}`,
+        doctor: `${doctor.firstName} ${doctor.lastName}`,
+        dateStart: dataprue,
+        startHour: startTime,
+        endHour: endTime,
+      },
+    };
+    await sendMail(email);
     res.status(200).json(appointment);
   } catch (error) {
     res.status(500).json({ message: 'error' });
