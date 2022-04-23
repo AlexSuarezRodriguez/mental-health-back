@@ -10,9 +10,12 @@ const { updateUser } = require('../user/user.service');
 async function handlerCheckout(request, response) {
   const { paymentMethod, amount } = request.body;
   try {
-    let customer = await retrieveCustomer(request.user?.payment?.customerId);
-    if (!customer) {
+    const shopper = request.user?.payment?.customerId;
+    let customer;
+    if (!shopper) {
       customer = await createCustomer(request.user, paymentMethod);
+    } else {
+      customer = await retrieveCustomer(request.user?.payment?.customerId);
     }
     const userToUpdate = {
       payment: {
