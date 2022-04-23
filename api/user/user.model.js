@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
+      default: 'https://res.cloudinary.com/mentalhealth/image/upload/v1650642132/perfilgenerico_h7dtjm.png',
     },
     isActive: {
       type: Boolean,
@@ -83,6 +84,20 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
+    },
+    payment: {
+      customerId: String,
+      cards: [
+        {
+          paymentMethodId: String,
+          brand: String,
+          country: String,
+          exp_month: Number,
+          exp_year: Number,
+          funding: String,
+          last4: String,
+        },
+      ],
     },
     passwordResetToken: String,
     passwordResetExpires: Date,
