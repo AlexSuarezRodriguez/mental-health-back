@@ -39,6 +39,7 @@ async function handlerCreateUser(request, response) {
     newUser.passwordResetToken = hash;
     newUser.passwordResetExpires = Date.now() + 3600000 * 24;
     const user = await createUser(newUser);
+    console.log(user);
     const email = {
       from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
       to: user.email,
@@ -50,6 +51,7 @@ async function handlerCreateUser(request, response) {
         url: `https://mental-health-sigma.vercel.app//verify/${hash}`,
       },
     };
+    console.log(email);
     await sendMail(email);
     response.status(201).json(user);
   } catch (error) {
