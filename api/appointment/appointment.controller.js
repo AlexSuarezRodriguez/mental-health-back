@@ -56,8 +56,7 @@ async function handlerCreateAppointment(req, res) {
     const dataprue = finalDate.join('/');
     const startTime = startSplitted[1];
     const endTime = endSplitted[1];
-
-    const email = {
+    const emailPatient = {
       from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
       to: patient.email,
       subject: 'Confirmación cita Mental Health',
@@ -68,9 +67,25 @@ async function handlerCreateAppointment(req, res) {
         dateStart: dataprue,
         startHour: startTime,
         endHour: endTime,
+        link: 'https://meet.google.com/pub-purf-rqu?pli=1&authuser=0',
       },
     };
-    await sendMail(email);
+    const emailDoctor = {
+      from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
+      to: doctor.email,
+      subject: 'Sesion cita Mental Health',
+      template_id: 'd-37788759d00d47b5b59ce6e927e36a9e',
+      dynamic_template_data: {
+        patient: `${patient.firstName} ${patient.lastName}`,
+        doctor: `${doctor.firstName} ${doctor.lastName}`,
+        dateStart: dataprue,
+        startHour: startTime,
+        endHour: endTime,
+        link: 'https://meet.google.com/pub-purf-rqu?pli=1&authuser=0',
+      },
+    };
+    await sendMail(emailPatient);
+    await sendMail(emailDoctor);
     res.status(200).json(appointment);
   } catch (error) {
     res.status(500).json({ message: 'error' });
