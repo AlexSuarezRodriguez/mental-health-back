@@ -6,16 +6,16 @@ async function handlerLogin(request, response) {
   try {
     const user = await getUserByEmail(email);
     if (!user) {
-      return response.status(401).json({ message: 'Invalid email or password' });
+      return response.status(401).json({ error: { message: 'Email o contraseña invalido' } });
     }
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return response.status(401).json({ message: 'Invalid email or password' });
+      return response.status(401).json({ error: { message: 'Email o contraseña invalido' } });
     }
     const token = signToken(user.profile);
     return response.status(200).json({ user: user.profile, token });
   } catch (error) {
-    return response.status(400).json(error);
+    return response.status(400).json({ error });
   }
 }
 
