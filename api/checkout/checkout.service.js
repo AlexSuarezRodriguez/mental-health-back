@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 const Stripe = require('stripe');
 const Payment = require('./checkout.model');
+const { getUserById } = require('../user/user.service');
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -26,15 +27,18 @@ async function retrieveCustomer(customerId) {
   }
 }
 
-async function makePayment({ paymentMethod, amount, customer }) {
+async function makePayment({
+  paymentMethod, amount, customer, preAppointment,
+}) {
   const { id } = paymentMethod;
+  const doctor = await getUserById(preAppointment.doctorId);
   try {
     const payment = await stripe.paymentIntents.create({
       payment_method: id,
       amount,
       currency: 'usd',
       confirm: true,
-      description: 'example',
+      description: `Cita ${doctor.firstName} ${doctor.lastName} fecha: ${preAppointment.start}  `,
       receipt_email: customer.email,
       customer: customer.id,
     });

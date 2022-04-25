@@ -8,7 +8,7 @@ const {
 const { updateUser } = require('../user/user.service');
 
 async function handlerCheckout(request, response) {
-  const { paymentMethod, amount } = request.body;
+  const { paymentMethod, amount, preAppointment } = request.body;
   try {
     const client = request.user?.payment?.customerId;
     let customer;
@@ -27,7 +27,9 @@ async function handlerCheckout(request, response) {
       },
     };
     await updateUser(request.user._id, userToUpdate);
-    const payment = await makePayment({ paymentMethod, amount, customer });
+    const payment = await makePayment({
+      paymentMethod, amount, customer, preAppointment,
+    });
     const registeredPayment = {
       refId: payment.id,
       description: payment.description,
