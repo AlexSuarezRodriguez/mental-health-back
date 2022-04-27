@@ -50,7 +50,6 @@ async function handlerCreateUser(request, response) {
         url: `https://mental-health-sigma.vercel.app//verify/${hash}`,
       },
     };
-    console.log(email);
     await sendMail(email);
     response.status(201).json(user);
   } catch (error) {
