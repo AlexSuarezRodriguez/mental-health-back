@@ -39,7 +39,6 @@ async function handlerCreateUser(request, response) {
     newUser.passwordResetToken = hash;
     newUser.passwordResetExpires = Date.now() + 3600000 * 24;
     const user = await createUser(newUser);
-    console.log(user);
     const email = {
       from: '"Equipo Mental Health" <ingdiegocubidestrane@gmail.com>',
       to: user.email,
