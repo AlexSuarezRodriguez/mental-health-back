@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 const compose = require('composable-middleware');
 
-const secrets = process.env.SECRET_WORD;
+const getSecrets = () => process.env.SECRET_WORD;
+
 const { getUserByEmail } = require('../api/user/user.service');
 
 async function validateToken(token) {
   try {
-    const payload = await jwt.verify(token, secrets);
+    const payload = await jwt.verify(token, getSecrets());
     return payload;
   } catch (error) {
     return null;
@@ -50,7 +51,7 @@ function hasRole(allowRoles = []) {
 }
 
 function signToken(payload) {
-  const token = jwt.sign(payload, secrets, { expiresIn: '2h' });
+  const token = jwt.sign(payload, getSecrets(), { expiresIn: '2h' });
   return token;
 }
 
