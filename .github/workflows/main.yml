@@ -15,3 +15,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.14.0
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
