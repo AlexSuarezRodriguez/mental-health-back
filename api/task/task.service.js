@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
+const { ObjectId } = require('mongoose').Types;
 const taskModel = require('./task.model');
 
 async function getAllTasks(user) {
-  const tasks = await taskModel.find({ userId: user._id, status: false });
+  const tasks = await taskModel.find({ userId: new ObjectId(user._id), status: false });
   return (tasks);
 }
 
