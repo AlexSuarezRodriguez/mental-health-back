@@ -8,7 +8,7 @@
     "start:dev": "nodemon index.js",
     "test": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll --detectOpenHandles",
-    "lint": "eslint --ext .js,.jsx src/"
+    "lint": "eslint --ext .js"
   },
   "keywords": [],
   "author": "mental health team",
