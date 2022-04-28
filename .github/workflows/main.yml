@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Nodejs v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - name: Run Eslint tasks
+        run: npm run lint
