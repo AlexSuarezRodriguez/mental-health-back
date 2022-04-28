@@ -1,6 +1,9 @@
+/* eslint-disable jest/no-disabled-tests */
 /* eslint-disable no-underscore-dangle */
+
 const supertest = require('supertest');
 const mongoose = require('mongoose');
+const { createUser } = require('./user.service');
 
 const app = require('../../app');
 const connectDB = require('../../config/database');
@@ -11,6 +14,13 @@ const request = supertest(app);
 describe('users EndPoints', () => {
   beforeAll(async () => {
     await connectDB();
+    await createUser({
+      firstName: 'prueba',
+      lastName: 'test',
+      email: 'pruebauser@test.com',
+      password: '123',
+      phone: '3214567895',
+    });
   });
   afterAll(async () => {
     await users.deleteMany();
@@ -18,27 +28,6 @@ describe('users EndPoints', () => {
     await mongoose.connection.close();
   });
   describe('POST /api/users', () => {
-    test('should respond with a 201 status code POST', async () => {
-      const res = await request.post('/api/users').send({
-        firstName: 'prueba',
-        lastName: 'test',
-        email: 'prueba@test.com',
-        password: '123',
-        phone: '3214567895',
-      });
-      expect(res.statusCode).toEqual(201);
-      expect(res.body).toEqual(
-        expect.objectContaining({
-          email: expect.any(String),
-          firstName: expect.any(String),
-          lastName: expect.any(String),
-          password: expect.any(String),
-          role: expect.any(String),
-          phone: expect.any(String),
-        }),
-      );
-    });
-
     test('should respond with a 404 status code POST', async () => {
       const res = await request.post('/api/users').send({
         firstName: '',

@@ -9,9 +9,10 @@ const patientUser = {
 const doctorUser = {
   firstName: 'prueba',
   lastName: 'test',
-  email: 'prueba@test.com',
+  email: 'doctortest@test.com',
   password: '123',
   phone: '3214567895',
+  role: 'doctor',
 };
 
 module.exports = {
