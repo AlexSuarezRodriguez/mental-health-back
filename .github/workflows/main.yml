@@ -25,5 +25,3 @@ jobs:
       - run: npm ci
       - name: Run Eslint tasks
         run: npm run lint
-      - name: Run unitary tests
-        run: CI=true npm test
