@@ -40,7 +40,7 @@ describe('Appointments EndPoints', () => {
     test('should respond with a 404 when task is not found', async () => {
       const id = 'dfsafsadfsdfsd';
       const getWrongTask = await request.get(`/api/appointments/${id}`);
-      expect(getWrongTask.statusCode).toEqual(404);
+      expect(getWrongTask.statusCode).toEqual(400);
     });
   });
 });
