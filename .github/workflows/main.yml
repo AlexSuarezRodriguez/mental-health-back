@@ -28,6 +28,6 @@ jobs:
       - name: Run unitary tests
         run: CI=true npm test
         env:
-          mongo_db_uri: mongodb+srv://admin-mentalhealth:0FSXvIKChnKvRZSZ@cluster0.ct6bn.mongodb.net/mentalhealth
-          secret_word: wendyalexpooldiegotopv20
+          MONGO_DB_URI: mongodb+srv://admin-mentalhealth:0FSXvIKChnKvRZSZ@cluster0.ct6bn.mongodb.net/mentalhealth
+          SECRET_WORD: wendyalexpooldiegotopv20
 
