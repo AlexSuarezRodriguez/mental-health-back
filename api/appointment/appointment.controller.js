@@ -94,12 +94,11 @@ async function handlerCreateAppointment(req, res) {
 
 async function handlerDeleteAppointment(req, res) {
   const { id } = req.params;
-  const appointment = await deleteAppointment(id);
-
-  if (!appointment) {
-    res.status(404).json({ message: `service not found with id: ${id}` });
-  } else {
+  try {
+    const appointment = await deleteAppointment(id);
     res.status(200).json(appointment);
+  } catch (error) {
+    res.status(404).json({ message: `service not found with id: ${id}` });
   }
 }
 
@@ -114,7 +113,6 @@ async function handlerUpdateAppointment(req, res) {
     res.status(200).json(updatedAppointment);
   }
 }
-
 module.exports = {
   handlerAllAppointment,
   handlerOneAppointment,

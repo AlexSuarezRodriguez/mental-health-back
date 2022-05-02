@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const AppointmentModel = require('./appointment.model');
 
 function getAllAppointment() {
@@ -32,15 +33,14 @@ async function createAppointment(appointment) {
   return newAppointment.save();
 }
 
-async function deleteAppointment(id) {
-  const appointment = await AppointmentModel.findByIdAndDelete(id);
+async function deleteAppointment(_id) {
+  const appointment = await AppointmentModel.findByIdAndDelete(_id);
 
   if (!appointment) {
     return null;
   }
   return appointment;
 }
-
 async function updateAppointment(id, appointment) {
   const updatedAppointment = await AppointmentModel.findByIdAndUpdate(
     id,
