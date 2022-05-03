@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Nodejs v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci
+      - name: Run Eslint tasks
+        run: npm run lint
+      - name: Run unitary tests
+        run: CI=true npm test
+        env: 
+          MONGO_DB_URI: mongodb+srv://admin-mentalhealth:0FSXvIKChnKvRZSZ@cluster0.ct6bn.mongodb.net/mentalhealth
+          SECRET_WORD: wendyalexpooldiegotopv20
