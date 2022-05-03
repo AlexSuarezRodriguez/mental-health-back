@@ -17,7 +17,11 @@ let userToken;
 describe('users EndPoints', () => {
   beforeAll(async () => {
     await connectDB();
+<<<<<<< HEAD
     user = await UserModel.create(patientUser); // traer el primer user
+=======
+    user = await UserModel.create(patientUser);
+>>>>>>> 5b0dcc1c801ce2997210b9a15bb9c472c6247c0f
     userToken = signToken(user.profile);
   });
   afterAll(async () => {
