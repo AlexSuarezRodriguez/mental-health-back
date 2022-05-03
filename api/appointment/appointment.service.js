@@ -45,6 +45,7 @@ async function updateAppointment(id, appointment) {
   const updatedAppointment = await AppointmentModel.findByIdAndUpdate(
     id,
     appointment,
+    { new: true },
   );
   return updatedAppointment;
 }

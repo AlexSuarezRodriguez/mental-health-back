@@ -104,7 +104,7 @@ async function handlerDeleteAppointment(req, res) {
 
 async function handlerUpdateAppointment(req, res) {
   const { id } = req.params;
-  const { body } = req.body;
+  const { body } = req;
   const updatedAppointment = await updateAppointment(id, body);
 
   if (!updatedAppointment) {
