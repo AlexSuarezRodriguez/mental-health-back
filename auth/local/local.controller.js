@@ -6,7 +6,7 @@ async function handlerLogin(request, response) {
   try {
     const user = await getUserByEmail(email);
     if (!user) {
-      return response.status(401).json({ error: { message: 'Email o contraseña invalido' } });
+      return response.status(401).json({ error: { message: 'El Usuario no existe' } });
     }
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
