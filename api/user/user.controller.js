@@ -1,3 +1,5 @@
+/* eslint-disable no-return-await */
+/* eslint-disable no-underscore-dangle */
 const crypto = require('crypto');
 
 const {
@@ -9,6 +11,9 @@ const {
   getUserByEmail,
 } = require('./user.service');
 
+const { getAppointmentByPatientId, deleteAppointment } = require('../appointment/appointment.service');
+const { getChistorybyUserId, deleteChistory } = require('../clinicHistory/clinicHistory.service');
+const { getTaskByPatientId, deleteTask } = require('../task/task.service');
 const { sendMail } = require('../../utils/emails');
 
 async function handlerGetAllUsers(request, response) {
@@ -82,6 +87,18 @@ async function handlerDeleteUser(request, response) {
     }
   } else {
     try {
+      const appointmentsPatient = await getAppointmentByPatientId(id);
+      const clinicHistoryId = await getChistorybyUserId(id);
+      const taskByPatientId = await getTaskByPatientId(id);
+      appointmentsPatient.map(async (element) => {
+        await deleteAppointment(element._id);
+      });
+      clinicHistoryId.map(async (element) => {
+        await deleteChistory(element._id);
+      });
+      taskByPatientId.map(async (element) => {
+        await deleteTask(element._id);
+      });
       const deletedUser = await deleteUser(id);
       response.status(200).json(deletedUser);
     } catch (error) {

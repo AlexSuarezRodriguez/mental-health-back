@@ -11,7 +11,15 @@ async function getOneTask(id) {
   const task = await taskModel.findById(id).populate({ path: 'userId', select: 'firstName lastName' });
   return (task);
 }
+async function getTaskByPatientId(_id) {
+  const appointment = await taskModel
+    .find({ userId: { _id } });
 
+  if (!appointment) {
+    return null;
+  }
+  return appointment;
+}
 async function createTask(task) {
   const newTask = await taskModel.create(task);
   return (newTask);
@@ -28,5 +36,5 @@ async function deleteTask(id) {
 }
 
 module.exports = {
-  getAllTasks, getOneTask, createTask, updatedTask, deleteTask,
+  getAllTasks, getOneTask, createTask, updatedTask, deleteTask, getTaskByPatientId,
 };
